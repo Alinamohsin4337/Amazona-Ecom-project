@@ -14,6 +14,21 @@ main{
   flex-wrap: wrap;
   justify-content: center;
 }
+.rating span{
+  color:palevioletred
+}
+.btn-primary:hover{
+  color:rgb(207, 73, 117);
+  background-color:rgb(235, 141, 235);
+  border-color:rgb(212, 153, 212) ;
+
+}
+.btn-primary{
+  background-color:palevioletred;
+ color:rgb(223, 185, 223);
+  border-color:palevioletred ;
+  
+}
 .product{
   border:1px #404040 solid;
   margin:1rem;
@@ -24,4 +39,7 @@ main{
 }
 .product-info{
 padding: 1rem;
+}
+.img-large{
+max-width: 70%;
 }

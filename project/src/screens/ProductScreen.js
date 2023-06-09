@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from "react";
+import React, { useReducer, useEffect, useContext } from "react";
 import axios from "axios";
 import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
@@ -11,6 +11,8 @@ import Button from "react-bootstrap/Button";
 import Rating from "../components/Rating";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
+import { getError } from "../Utils";
+import { Store } from "../Store";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -42,11 +44,18 @@ const ProductScreen = () => {
         );
         dispatch({ type: "FETCH_SUCCESS", payload: result.data });
       } catch (err) {
-        dispatch({ type: "FETCH_FAIL", payload: err.message });
+        dispatch({ type: "FETCH_FAIL", payload: getError(err) });
       }
     };
     fetchData();
   }, [slug]);
+  const { state, dispatch: cxtDispatch } = useContext(Store);
+  const addToCartHandler = () => {
+    cxtDispatch({
+      type: "CART_ADD_ITEM",
+      payload: { ...product, quantity: 1 },
+    });
+  };
 
   return (
     <div>
@@ -107,7 +116,9 @@ const ProductScreen = () => {
                     {product.countInStock > 0 && (
                       <ListGroup.Item>
                         <div className="d-grid">
-                          <Button>Add to Cart</Button>
+                          <Button onClick={addToCartHandler}>
+                            Add to Cart
+                          </Button>
                         </div>
                       </ListGroup.Item>
                     )}

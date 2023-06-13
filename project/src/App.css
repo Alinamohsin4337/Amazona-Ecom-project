@@ -43,3 +43,6 @@ padding: 1rem;
 .img-large{
 max-width: 70%;
 }
+.img-thumbnail{
+  height:80px;
+}

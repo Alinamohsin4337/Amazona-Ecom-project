@@ -1,16 +1,31 @@
 import express from "express";
 import cors from "cors";
 import data from "./data.js";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import seedRouter from "./routes/seedRoutes.js";
+
+dotenv.config();
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => {
+    console.log("connected to db");
+  })
+  .catch((err) => {
+    console.log("error", err.msg);
+  });
 
 const app = express();
-
-// Use the cors middleware
 app.use(cors());
 
-// Your routes go here
+// Use the seedRouter for "/api/seed" route
+app.use("/api/seed", seedRouter);
+
+// Your other routes go here
 app.get("/api/products", (req, res) => {
   res.send(data.products);
 });
+
 app.get("/api/products/slug/:slug", (req, res) => {
   const product = data.products.find((x) => x.slug === req.params.slug);
 
@@ -20,6 +35,7 @@ app.get("/api/products/slug/:slug", (req, res) => {
     res.status(404).send({ message: "product not found" });
   }
 });
+
 app.get("/api/products/:id", (req, res) => {
   const product = data.products.find((x) => x._id === req.params.id);
 
@@ -29,7 +45,9 @@ app.get("/api/products/:id", (req, res) => {
     res.status(404).send({ message: "product not found" });
   }
 });
+
 // Rest of your server setup code
+
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

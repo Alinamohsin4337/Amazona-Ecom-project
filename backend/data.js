@@ -1,7 +1,7 @@
 const data = {
   products: [
     {
-      _id: "1",
+      // _id: "1",
       slug: " nike shirt 1",
       name: "nike shirt 1",
       Category: "shirt",
@@ -13,7 +13,7 @@ const data = {
       countInStock: 3,
     },
     {
-      _id: "2",
+      // _id: "2",
       slug: " nike shirt 2",
       name: "nike shirt 2",
       Category: "shirt",
@@ -25,7 +25,7 @@ const data = {
       countInStock: 5,
     },
     {
-      _id: "3",
+      // _id: "3",
       slug: " nike shirt 3",
       name: "nike shirt 3",
       Category: "shirt",
@@ -37,7 +37,7 @@ const data = {
       countInStock: 5,
     },
     {
-      _id: "4",
+      // _id: "4",
       slug: " nike shirt 4",
       name: "nike shirt 4",
       Category: "shirt",

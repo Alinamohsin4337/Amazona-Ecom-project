@@ -3,7 +3,9 @@ import cors from "cors";
 import data from "./data.js";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import seedRouter from "./routes/seedRoutes.js";
+import SeedRouter from "./routes/seedRoutes.js";
+import productRouter from "./routes/productRoutes.js";
+import axios from "axios";
 
 dotenv.config();
 mongoose
@@ -17,38 +19,22 @@ mongoose
 
 const app = express();
 app.use(cors());
-
-// Use the seedRouter for "/api/seed" route
-app.use("/api/seed", seedRouter);
-
-// Your other routes go here
-app.get("/api/products", (req, res) => {
-  res.send(data.products);
-});
-
-app.get("/api/products/slug/:slug", (req, res) => {
-  const product = data.products.find((x) => x.slug === req.params.slug);
-
-  if (product) {
-    res.send(product);
-  } else {
-    res.status(404).send({ message: "product not found" });
-  }
-});
-
-app.get("/api/products/:id", (req, res) => {
-  const product = data.products.find((x) => x._id === req.params.id);
-
-  if (product) {
-    res.send(product);
-  } else {
-    res.status(404).send({ message: "product not found" });
-  }
-});
-
-// Rest of your server setup code
+app.use(express.json());
+app.use("/api/seed", SeedRouter);
+app.use("/api/products", productRouter);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
+
+  // const url = "http://localhost:5000/api/seed";
+
+  // axios
+  //   .get(url)
+  //   .then((response) => {
+  //     console.log("Response:", response.data);
+  //   })
+  //   .catch((error) => {
+  //     console.error("Error:", error);
+  //   });
 });

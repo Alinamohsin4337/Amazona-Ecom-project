@@ -40,3 +40,13 @@ if (pallin === drome) {
 } else {
   console.log("false");
 }
+let arrayb = [3, 6, 18, 14, 20];
+let biggest = 0;
+
+for (let i = 0; i < arrayb.length; i++) {
+  if (arrayb[i] > biggest) {
+    biggest = arrayb[i];
+  }
+}
+
+console.log("biggest", biggest);

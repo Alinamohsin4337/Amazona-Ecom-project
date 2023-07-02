@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import SeedRouter from "./routes/seedRoutes.js";
 import productRouter from "./routes/productRoutes.js";
 import userRouter from "./routes/userRoutes.js";
+import orderRouter from "./routes/orderRoutes.js";
 // import axios from "axios";
 
 dotenv.config();
@@ -29,7 +30,7 @@ app.use("/api/users", userRouter);
 
 app.use("/api/seed", SeedRouter);
 app.use("/api/products", productRouter);
-
+app.use("/api/orders", orderRouter);
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

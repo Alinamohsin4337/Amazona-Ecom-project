@@ -80,19 +80,35 @@
 
 // console.log("array1:", array1);
 
+// let array = [1, 2, 5, 4, 4, 4, 2];
+
+// for (let i = 0; i < array.length; i++) {
+//   let count = 0; // Initialize count for each unique element
+
+//   // Check if the element has been counted before
+//   if (array.indexOf(array[i]) === i) {
+//     for (let j = 0; j < array.length; j++) {
+//       if (array[i] === array[j]) {
+//         count++; // Increment count if element is found
+//       }
+//     }
+
+//     // Display the element and its count
+//     console.log("Element:", array[i]);
+//     console.log("Count:", count);
+//   }
+// }
+
 let array = [1, 2, 5, 4, 4, 4, 2];
-let isDuplicate = false;
-let count = 1;
+let count = {};
+
 for (let i = 0; i < array.length; i++) {
-  for (let j = 0; j < array.length; j++) {
-    if (array[i] === array[j]) {
-      isDuplicate = true;
-      break;
-    }
-  }
-  if (isDuplicate) {
-    count++;
+  let currentElement = array[i];
+  if (count[currentElement]) {
+    count[currentElement]++;
+  } else {
+    count[currentElement] = 1;
   }
 }
 
-console.log("count:", count);
+console.log(count);

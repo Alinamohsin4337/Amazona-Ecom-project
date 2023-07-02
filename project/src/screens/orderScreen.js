@@ -7,20 +7,23 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { getError } from "../Utils";
 import { Helmet } from "react-helmet-async";
-import { Card, Col, Row, ListGroup } from "react-bootstrap";
-
+import { Card } from "react-bootstrap";
+import { Col } from "react-bootstrap";
+import { Row } from "react-bootstrap";
+import { ListGroup } from "react-bootstrap";
 function reducer(state, action) {
   switch (action.type) {
-    case "CREATE_REQUEST":
+    case "FETCH_REQUEST":
       return { ...state, loading: true };
-    case "CREATE_SUCCESS":
-      return { ...state, loading: false };
-    case "CREATE_FAIL":
-      return { ...state, loading: false };
+    case "FETCH_SUCCESS":
+      return { ...state, loading: false, order: action.payload };
+    case "FETCH_FAIL":
+      return { ...state, loading: false, error: action.payload };
     default:
       return state;
   }
 }
+
 export default function OrderScreen() {
   const { state } = useContext(Store);
   const { userInfo } = state;
@@ -37,9 +40,12 @@ export default function OrderScreen() {
     const fetchOrder = async () => {
       try {
         dispatch({ type: "FETCH_REQUEST" });
-        const { data } = await axios.get(`/api/orders/${orderId}`, {
-          headers: { authorization: `Bearer ${userInfo.token}` },
-        });
+        const { data } = await axios.get(
+          `http://localhost:5000/api/orders/${orderId}`,
+          {
+            headers: { authorization: `Bearer ${userInfo.token}` },
+          }
+        );
         dispatch({ type: "FETCH_SUCCESS", payload: data });
       } catch (err) {
         dispatch({ type: "FETCH_FAIL", payload: getError(err) });
@@ -51,7 +57,7 @@ export default function OrderScreen() {
     if (!order._id || (order._id && order._id !== orderId)) {
       fetchOrder();
     }
-  }, [navigate, userInfo, orderId]);
+  }, [navigate, userInfo, orderId, order]);
   return loading ? (
     <LoadingBox></LoadingBox>
   ) : error ? (
@@ -72,16 +78,6 @@ export default function OrderScreen() {
                 <strong>Address: </strong> {order.shippingAddress.address},
                 {order.shippingAddress.city}, {order.shippingAddress.postalCode}
                 ,{order.shippingAddress.country}
-                &nbsp;
-                {order.shippingAddress.location &&
-                  order.shippingAddress.location.lat && (
-                    <a
-                      target="_new"
-                      href={`https://maps.google.com?q=${order.shippingAddress.location.lat},${order.shippingAddress.location.lng}`}
-                    >
-                      Show On Map
-                    </a>
-                  )}
               </Card.Text>
               {order.isDelivered ? (
                 <MessageBox variant="success">

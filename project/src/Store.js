@@ -8,7 +8,7 @@ const initialState = {
   cart: {
     cartItems: localStorage.getItem("CartItems")
       ? JSON.parse(localStorage.getItem("CartItems"))
-      : {},
+      : [],
     shippingAddress: localStorage.getItem("shippingAddress")
       ? JSON.parse(localStorage.getItem("shippingAddress"))
       : [],

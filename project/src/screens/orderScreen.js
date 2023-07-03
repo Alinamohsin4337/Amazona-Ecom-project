@@ -23,7 +23,12 @@ function reducer(state, action) {
     case "PAY_REQUEST":
       return { ...state, loadingPay: true };
     case "PAY_SUCCESS":
-      return { ...state, loadingPay: false, successPay: true };
+      return {
+        ...state,
+        loadingPay: false,
+        successPay: true,
+        order: action.payload,
+      };
     case "PAY_FAIL":
       return { ...state, loadingPay: false };
     case "PAY_RESET":
@@ -71,7 +76,7 @@ export default function OrderScreen() {
       try {
         dispatch({ type: "PAY_REQUEST" });
         const { data } = await axios.put(
-          `http://localhost:5000/api/orders/${order._id}/pay`, // Use orderId instead of order._id
+          `http://localhost:5000/api/orders/${orderId}/pay`,
           details,
           {
             headers: { authorization: `Bearer ${userInfo.token}` },
@@ -79,6 +84,9 @@ export default function OrderScreen() {
         );
         dispatch({ type: "PAY_SUCCESS", payload: data });
         toast.success("Order is paid");
+        dispatch({ type: "CART_CLEAR" });
+        localStorage.removeItem("CartItems");
+        // navigate("/");
       } catch (err) {
         dispatch({ type: "PAY_FAIL", payload: getError(err) });
         toast.error(getError(err));
@@ -135,7 +143,7 @@ export default function OrderScreen() {
 
       loadPaypalScript();
     }
-  }, [navigate, userInfo, orderId, order, paypalDispatch, successPay]);
+  }, [navigate, paypalDispatch, userInfo, orderId, order, successPay]);
   return loading ? (
     <LoadingBox></LoadingBox>
   ) : error ? (
@@ -152,10 +160,11 @@ export default function OrderScreen() {
             <Card.Body>
               <Card.Title>Shipping</Card.Title>
               <Card.Text>
-                <strong>Name:</strong> {order.shippingAddress.fullName} <br />
-                <strong>Address: </strong> {order.shippingAddress.address},
-                {order.shippingAddress.city}, {order.shippingAddress.postalCode}
-                ,{order.shippingAddress.country}
+                <strong>Name:</strong> {order.shippingAddress?.fullName} <br />
+                <strong>Address: </strong> {order.shippingAddress?.address},
+                {order.shippingAddress?.city},
+                {order.shippingAddress?.postalCode},
+                {order.shippingAddress?.country}
               </Card.Text>
               {order.isDelivered ? (
                 <MessageBox variant="success">
@@ -186,7 +195,7 @@ export default function OrderScreen() {
             <Card.Body>
               <Card.Title>Items</Card.Title>
               <ListGroup variant="flush">
-                {order.orderItems.map((item) => (
+                {order.orderItems?.map((item) => (
                   <ListGroup.Item key={item._id}>
                     <Row className="align-items-center">
                       <Col md={6}>
@@ -216,19 +225,19 @@ export default function OrderScreen() {
                 <ListGroup.Item>
                   <Row>
                     <Col>Items</Col>
-                    <Col>${order.itemsPrice.toFixed(2)}</Col>
+                    <Col>${order.itemsPrice?.toFixed(2)}</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
                     <Col>Shipping</Col>
-                    <Col>${order.shippingPrice.toFixed(2)}</Col>
+                    <Col>${order.shippingPrice?.toFixed(2)}</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
                     <Col>Tax</Col>
-                    <Col>${order.taxPrice.toFixed(2)}</Col>
+                    <Col>${order.taxPrice?.toFixed(2)}</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
@@ -237,7 +246,7 @@ export default function OrderScreen() {
                       <strong> Order Total</strong>
                     </Col>
                     <Col>
-                      <strong>${order.totalPrice.toFixed(2)}</strong>
+                      <strong>${order.totalPrice?.toFixed(2)}</strong>
                     </Col>
                   </Row>
                 </ListGroup.Item>

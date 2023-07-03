@@ -28,6 +28,15 @@ orderRouter.post(
     res.status(201).send(response); // Send the response
   })
 );
+orderRouter.get(
+  "/mine",
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    const orders = await Order.find({ user: req.user._id });
+
+    res.send(orders);
+  })
+);
 
 orderRouter.get(
   "/:id",
@@ -42,10 +51,14 @@ orderRouter.get(
   })
 );
 orderRouter.put(
-  "/:id",
+  "/:id/pay",
   isAuth,
   expressAsyncHandler(async (req, res) => {
-    const order = await Order.findById(req.params.id);
+    const order = await Order.findById(req.params.id).populate(
+      "user",
+      "email name"
+    );
+
     if (order) {
       order.isPaid = true;
       order.paidAt = Date.now();
@@ -55,11 +68,12 @@ orderRouter.put(
         update_time: req.body.update_time,
         email_address: req.body.email_address,
       };
-      const updateOrder = await order.save();
-      res.status(404).send({ message: "Order Paid", order: updateOrder });
+      const updatedOrder = await order.save();
+      res.status(200).send({ message: "Order Paid", order: updatedOrder });
     } else {
       res.status(404).send({ message: "Order Not Found" });
     }
   })
 );
+
 export default orderRouter;

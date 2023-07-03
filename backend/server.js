@@ -23,7 +23,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.get("api/keys/paypal", (req, res) => {
+
+app.get("/api/keys/paypal", (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID || "sb");
 });
 app.use((err, req, res, next) => {

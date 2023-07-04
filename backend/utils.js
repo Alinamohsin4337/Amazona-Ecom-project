@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-const generateToken = (user) => {
+export const generateToken = (user) => {
   return jwt.sign(
     {
       _id: user._id,
@@ -13,7 +13,7 @@ const generateToken = (user) => {
     }
   );
 };
-export default generateToken;
+
 export const isAuth = (req, res, next) => {
   const authorization = req.headers.authorization;
   if (authorization) {

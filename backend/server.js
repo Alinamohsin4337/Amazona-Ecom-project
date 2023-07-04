@@ -39,7 +39,7 @@ const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 
-  // const url = "http://localhost:5000/api/seed";
+  // const url = "http://localhost:5000/api/users/profile";
 
   // axios
   //   .get(url)

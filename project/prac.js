@@ -99,16 +99,27 @@
 //   }
 // }
 
-let array = [1, 2, 5, 4, 4, 4, 2];
-let count = {};
+// let array = [1, 2, 5, 4, 4, 4, 2];
+// let count = {};
 
+// for (let i = 0; i < array.length; i++) {
+//   let currentElement = array[i];
+//   if (count[currentElement]) {
+//     count[currentElement]++;
+//   } else {
+//     count[currentElement] = 1;
+//   }
+// }
+
+// console.log(count);
+let array = [5, 4, 8, 1, 2];
 for (let i = 0; i < array.length; i++) {
-  let currentElement = array[i];
-  if (count[currentElement]) {
-    count[currentElement]++;
-  } else {
-    count[currentElement] = 1;
+  let num = array[i];
+  for (let j = i + 1; j < array.length; j++) {
+    if (array[j] > num) {
+      array[i] = array[j];
+      array[j] = num;
+    }
   }
 }
-
-console.log(count);
+console.log("array", array);

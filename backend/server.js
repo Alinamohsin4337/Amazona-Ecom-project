@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import data from "./data.js";
+import path from "path";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import SeedRouter from "./routes/seedRoutes.js";
@@ -35,6 +35,11 @@ app.use("/api/users", userRouter);
 app.use("/api/seed", SeedRouter);
 app.use("/api/products", productRouter);
 app.use("/api/orders", orderRouter);
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, "/project/build")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/project/build/index.html"));
+});
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

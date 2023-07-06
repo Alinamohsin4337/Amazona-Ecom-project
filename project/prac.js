@@ -112,14 +112,44 @@
 // }
 
 // console.log(count);
-let array = [5, 4, 8, 1, 2];
-for (let i = 0; i < array.length; i++) {
-  let num = array[i];
-  for (let j = i + 1; j < array.length; j++) {
-    if (array[j] > num) {
-      array[i] = array[j];
-      array[j] = num;
-    }
-  }
+// let array = [5, 4, 8, 1, 2];
+// for (let i = 0; i < array.length; i++) {
+//   let num = array[i];
+//   for (let j = i + 1; j < array.length; j++) {
+//     if (array[j] > num) {
+//       array[i] = array[j];
+//       array[j] = num;
+//     }
+//   }
+// }
+// console.log("array", array);
+
+// function num(n) {
+//   if (n === 0) return;
+//   console.log("n", n);
+//   num(n - 1);
+// }
+
+// num(5);
+
+// let num = 4;
+// for (let i = num - 1; i >= 1; i--) {
+//   num = num * i;
+// }
+
+// console.log("num", num);
+
+// function facto(num) {
+//   if (num === 0) return 1;
+//   console.log("number", num);
+//   return num * facto(num - 1);
+// }
+// console.log(facto(3));
+
+function number(num) {
+  if (num === 6) return;
+  console.log("num", num);
+
+  number(num + 1);
 }
-console.log("array", array);
+number(1);

@@ -25,6 +25,7 @@ import { Button } from "react-bootstrap";
 import axios from "axios";
 import { getError } from "./Utils";
 import SearchBox from "./components/SearchBox";
+import SearchScreen from "./screens/SearchScreen";
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
@@ -69,23 +70,16 @@ function App() {
                 variant="dark"
                 onClick={() => setSideBarIsOpen(!sidebarIsOpen)}
               >
-                <i className="fas fa-bars "></i>
+                <i className="fas fa-bars"></i>
               </Button>
-              <LinkContainer to="/">
-                <Navbar.Brand>amazona </Navbar.Brand>
-              </LinkContainer>
+              <SearchBox />
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
-                <SearchBox />
-                <Nav className="me-auto">
-                  <Link to="/cart" className="nav-link">
-                    Cart
-                    {cart.cartItems.length > 0 && (
-                      <Badge pill bg="danger">
-                        {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
-                      </Badge>
-                    )}
-                  </Link>
+                <LinkContainer to="/" className="navbar-brand-center">
+                  <Navbar.Brand className="text-center">Amazona</Navbar.Brand>
+                </LinkContainer>
+
+                <Nav>
                   {userInfo ? (
                     <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
                       <LinkContainer to="/profile">
@@ -105,14 +99,23 @@ function App() {
                     </NavDropdown>
                   ) : (
                     <Link className="nav-link" to="/signin">
-                      Sign In{" "}
+                      Sign In
                     </Link>
                   )}
+                  <Link to="/cart" className="nav-link">
+                    Cart
+                    {cart.cartItems.length > 0 && (
+                      <Badge pill bg="danger">
+                        {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                      </Badge>
+                    )}
+                  </Link>
                 </Nav>
               </Navbar.Collapse>
             </Container>
           </Navbar>
         </header>
+
         <div
           className={
             sidebarIsOpen
@@ -150,6 +153,7 @@ function App() {
               <Route path="/placeOrder" element={<PlaceOrderScreen />} />
               <Route path="/order/:id" element={<OrderScreen />} />
               <Route path="/orderhistory" element={<OrderHistoryScreen />} />
+              <Route path="/search" element={<SearchScreen />} />
             </Routes>
           </Container>
         </main>

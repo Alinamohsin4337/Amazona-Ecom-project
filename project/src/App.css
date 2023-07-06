@@ -1,8 +1,4 @@
-header a {
-color:whitesmoke;
-font-weight: bold;
-text-decoration: none;
-}
+
 .site-container{
   min-height: 100vh;
 }
@@ -86,4 +82,10 @@ max-width: 70%;
 .btn-outline-primary{
 background-color:palevioletred;
 color: rgb(207, 73, 117)
+}
+.navbar-brand-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
 }

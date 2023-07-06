@@ -10,7 +10,12 @@ body {
 header {
   background-color: #404040;
   padding: 1rem;
-  display: flex;
-  justify-content: start;
-  align-items: start; /* Add this line */
+}
+
+
+
+.nav-link {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
 }

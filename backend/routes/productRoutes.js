@@ -22,10 +22,11 @@ productRouter.get(
     const queryFilter =
       searchQuery && searchQuery !== "all"
         ? {
-            name: {
-              $regex: searchQuery,
-              $options: "i",
-            },
+            $or: [
+              { name: { $regex: searchQuery, $options: "i" } },
+              { category: { $regex: searchQuery, $options: "i" } },
+              // Add more fields if needed
+            ],
           }
         : {};
     const categoryFilter = category && category !== "all" ? { category } : {};

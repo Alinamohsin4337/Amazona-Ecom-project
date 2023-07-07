@@ -146,10 +146,22 @@
 // }
 // console.log(facto(3));
 
-function number(num) {
-  if (num === 6) return;
-  console.log("num", num);
+// function number(num) {
+//   if (num === 6) return;
+//   console.log("num", num);
 
-  number(num + 1);
+//   number(num + 1);
+// }
+// number(1);
+
+function sum(i, n, s) {
+  if (i === n) {
+    s += i;
+    console.log("sum", s);
+    return;
+  }
+
+  s += i;
+  sum(i + 1, n, s);
 }
-number(1);
+sum(1, 5, 0);

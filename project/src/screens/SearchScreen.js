@@ -21,9 +21,10 @@ const reducer = (state, action) => {
       return {
         ...state,
         products: action.payload.products,
+        countProducts: action.payload.countProducts,
         page: action.payload.page,
         pages: action.payload.pages,
-        countProducts: action.payload.countProducts,
+
         loading: false,
       };
     case "FETCH_FAIL":
@@ -127,9 +128,7 @@ export default function SearchScreen() {
     const filterRating = filter.rating || rating;
     const filterPrice = filter.price || price;
     const sortOrder = filter.order || order;
-    return `${
-      skipPathname ? "" : "/search?"
-    }category=${filterCategory}&query=${filterQuery}&price=${filterPrice}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
+    return `/search?category=${filterCategory}&query=${filterQuery}&price=${filterPrice}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
   };
   return (
     <div>
@@ -166,7 +165,7 @@ export default function SearchScreen() {
             <ul>
               <li>
                 <Link
-                  className={"all" === price ? "text-bold" : ""}
+                  className={price === "all" ? "text-bold" : ""}
                   to={getFilterUrl({ price: "all" })}
                 >
                   Any
@@ -238,7 +237,7 @@ export default function SearchScreen() {
                   </div>
                 </Col>
                 <Col className="text-end">
-                  Sort by{" "}
+                  Sort by
                   <select
                     value={order}
                     onChange={(e) => {
@@ -248,7 +247,6 @@ export default function SearchScreen() {
                     <option value="newest">Newest Arrivals</option>
                     <option value="lowest">Price: Low to High</option>
                     <option value="highest">Price: High to Low</option>
-                    <option value="toprated">Avg. Customer Reviews</option>
                   </select>
                 </Col>
               </Row>
@@ -271,6 +269,7 @@ export default function SearchScreen() {
                     className="mx-1"
                     to={{
                       pathname: "/search",
+
                       search: getFilterUrl({ page: x + 1 }, true),
                     }}
                   >

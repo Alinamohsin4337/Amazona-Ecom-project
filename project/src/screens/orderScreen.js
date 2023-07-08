@@ -86,7 +86,6 @@ export default function OrderScreen() {
         toast.success("Order is paid");
         dispatch({ type: "CART_CLEAR" });
         localStorage.removeItem("CartItems");
-        // navigate("/");
       } catch (err) {
         dispatch({ type: "PAY_FAIL", payload: getError(err) });
         toast.error(getError(err));

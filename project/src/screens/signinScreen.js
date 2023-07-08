@@ -13,7 +13,9 @@ const SigninScreen = () => {
   const navigate = useNavigate();
   const { search } = useLocation();
   const redirectInUrl = new URLSearchParams(search).get("redirect");
-  const redirect = redirectInUrl ? redirectInUrl : "/";
+
+  const redirect = redirectInUrl;
+  // const redirect = redirectInUrl ? redirectInUrl : "/";
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const { state, dispatch: ctxDispatch } = useContext(Store);

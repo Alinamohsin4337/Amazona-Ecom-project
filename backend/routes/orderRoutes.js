@@ -88,7 +88,7 @@ orderRouter.put(
       // Perform necessary actions for COD payment
       // For example, update the order status to indicate COD payment
 
-      order.isPaid = true;
+      order.isPaid = false;
       order.paidAt = Date.now();
       order.paymentResult = {
         // Include relevant payment result information

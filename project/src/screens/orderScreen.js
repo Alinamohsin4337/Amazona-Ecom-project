@@ -126,7 +126,7 @@ export default function OrderScreen() {
         }
       );
       dispatch({ type: "COD_SUCCESS", payload: data });
-      toast.success("Order is paid");
+      toast.success("Order is placed");
       ctxDispatch({ type: "CART_CLEAR" });
       localStorage.removeItem("CartItems");
     } catch (err) {

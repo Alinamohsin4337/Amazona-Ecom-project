@@ -21,7 +21,7 @@ main{
 }
 .btn-primary{
   background-color:palevioletred;
- color:rgb(223, 185, 223);
+ color:rgb(141, 35, 141);
   border-color:palevioletred ;
   
 }
@@ -78,11 +78,11 @@ max-width: 70%;
 .text-bold {
   font-weight: bold;
 }
-.btn-primary,
-.btn-outline-primary{
+/* .btn-primary, */
+/* .btn-outline-primary{
 background-color:palevioletred;
-color: rgb(207, 73, 117)
-}
+color: rgb(118, 103, 161)
+} */
 .navbar-brand-center {
   display: flex;
   justify-content: center;

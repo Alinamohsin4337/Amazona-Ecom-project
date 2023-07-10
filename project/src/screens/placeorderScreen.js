@@ -66,9 +66,9 @@ export default function PlaceOrderScreen() {
         }
       );
       console.log(data);
-      ctxDispatch({ type: "CART_CLEAR" });
+      // ctxDispatch({ type: "CART_CLEAR" });
       dispatch({ type: "CREATE_SUCCESS" });
-      localStorage.removeItem("cartItems");
+      // localStorage.removeItem("cartItems");
       navigate(`/order/${data.order._id}`);
     } catch (err) {
       dispatch({ type: "CREATE_FAIL" });

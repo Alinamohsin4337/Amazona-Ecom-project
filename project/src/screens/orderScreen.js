@@ -33,26 +33,45 @@ function reducer(state, action) {
       return { ...state, loadingPay: false };
     case "PAY_RESET":
       return { ...state, loadingPay: false, successPay: false };
+    case "COD_REQUEST":
+      return { ...state, loadingCod: true };
+    case "COD_SUCCESS":
+      return {
+        ...state,
+        loadingCod: false,
+        successCod: true,
+        order: action.payload,
+      };
+    case "COD_FAIL":
+      return { ...state, loadingCod: false };
+    case "COD_RESET":
+      return { ...state, loadingCod: false, successCod: false };
+
     default:
       return state;
   }
 }
 
 export default function OrderScreen() {
-  const { state } = useContext(Store);
+  const { state, dispatch: ctxDispatch } = useContext(Store);
   const { userInfo } = state;
 
   const params = useParams();
   const { id: orderId } = params;
   const navigate = useNavigate();
-  const [{ loading, error, order, loadingPay, successPay }, dispatch] =
-    useReducer(reducer, {
-      loading: true,
-      order: {},
-      error: "",
-      loadingPay: false,
-      successPay: false,
-    });
+  const [
+    { loading, error, order, loadingPay, successPay, loadingCod, successCod },
+    dispatch,
+  ] = useReducer(reducer, {
+    loading: true,
+    order: {},
+    error: "",
+    loadingPay: false,
+    successPay: false,
+    loadingCod: false,
+    successCod: false,
+  });
+
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer({
     "client-id": "",
     currency: "USD",
@@ -84,7 +103,7 @@ export default function OrderScreen() {
         );
         dispatch({ type: "PAY_SUCCESS", payload: data });
         toast.success("Order is paid");
-        dispatch({ type: "CART_CLEAR" });
+        ctxDispatch({ type: "CART_CLEAR" });
         localStorage.removeItem("CartItems");
       } catch (err) {
         dispatch({ type: "PAY_FAIL", payload: getError(err) });
@@ -96,6 +115,26 @@ export default function OrderScreen() {
   function onError(err) {
     toast.error(getError(err));
   }
+  async function handleCodPayment() {
+    try {
+      dispatch({ type: "COD_REQUEST" });
+      const { data } = await axios.put(
+        `http://localhost:5000/api/orders/${orderId}/pay/cod`,
+        {},
+        {
+          headers: { authorization: `Bearer ${userInfo.token}` },
+        }
+      );
+      dispatch({ type: "COD_SUCCESS", payload: data });
+      toast.success("Order is paid");
+      ctxDispatch({ type: "CART_CLEAR" });
+      localStorage.removeItem("CartItems");
+    } catch (err) {
+      dispatch({ type: "COD_FAIL", payload: getError(err) });
+      toast.error(getError(err));
+    }
+  }
+
   useEffect(() => {
     const fetchOrder = async () => {
       try {
@@ -254,7 +293,7 @@ export default function OrderScreen() {
                     {isPending ? (
                       <LoadingBox />
                     ) : (
-                      <div>
+                      <>
                         <PayPalButtons
                           createOrder={(data, actions) =>
                             createOrder(data, actions)
@@ -264,9 +303,17 @@ export default function OrderScreen() {
                           }
                           onError={(err) => onError(err)}
                         />
-                      </div>
+                        {loadingPay && <LoadingBox />}
+                        <button
+                          type="button"
+                          className="btn btn-primary btn-block"
+                          onClick={handleCodPayment}
+                          disabled={loadingCod}
+                        >
+                          Pay with Cash on Delivery
+                        </button>
+                      </>
                     )}
-                    {loadingPay && <LoadingBox />}
                   </ListGroup.Item>
                 )}
               </ListGroup>

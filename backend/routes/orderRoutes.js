@@ -75,5 +75,33 @@ orderRouter.put(
     }
   })
 );
+orderRouter.put(
+  "/:id/pay/cod",
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    const order = await Order.findById(req.params.id).populate(
+      "user",
+      "email name"
+    );
+
+    if (order) {
+      // Perform necessary actions for COD payment
+      // For example, update the order status to indicate COD payment
+
+      order.isPaid = true;
+      order.paidAt = Date.now();
+      order.paymentResult = {
+        // Include relevant payment result information
+      };
+
+      const updatedOrder = await order.save();
+      res
+        .status(200)
+        .send({ message: "Order Paid (COD)", order: updatedOrder });
+    } else {
+      res.status(404).send({ message: "Order Not Found" });
+    }
+  })
+);
 
 export default orderRouter;

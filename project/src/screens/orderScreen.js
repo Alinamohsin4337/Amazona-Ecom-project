@@ -54,7 +54,7 @@ function reducer(state, action) {
 
 export default function OrderScreen() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
-  const { userInfo } = state;
+  const { userInfo, cart } = state;
 
   const params = useParams();
   const { id: orderId } = params;
@@ -294,24 +294,28 @@ export default function OrderScreen() {
                       <LoadingBox />
                     ) : (
                       <>
-                        <PayPalButtons
-                          createOrder={(data, actions) =>
-                            createOrder(data, actions)
-                          }
-                          onApprove={(data, actions) =>
-                            onApprove(data, actions)
-                          }
-                          onError={(err) => onError(err)}
-                        />
+                        {cart.paymentMethod === "PayPal" && (
+                          <PayPalButtons
+                            createOrder={(data, actions) =>
+                              createOrder(data, actions)
+                            }
+                            onApprove={(data, actions) =>
+                              onApprove(data, actions)
+                            }
+                            onError={(err) => onError(err)}
+                          />
+                        )}
                         {loadingPay && <LoadingBox />}
-                        <button
-                          type="button"
-                          className="btn btn-primary btn-block"
-                          onClick={handleCodPayment}
-                          disabled={loadingCod}
-                        >
-                          Pay with Cash on Delivery
-                        </button>
+                        {cart.paymentMethod === "cod" && (
+                          <button
+                            type="button"
+                            className="btn btn-primary btn-block"
+                            onClick={handleCodPayment}
+                            disabled={loadingCod}
+                          >
+                            Pay with Cash on Delivery
+                          </button>
+                        )}
                       </>
                     )}
                   </ListGroup.Item>

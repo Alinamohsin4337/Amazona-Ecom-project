@@ -111,7 +111,7 @@ function App() {
                       <LinkContainer to="/admin/dashboard">
                         <NavDropdown.Item>Dashboard</NavDropdown.Item>
                       </LinkContainer>
-                      <LinkContainer to="/admin/productlist">
+                      <LinkContainer to="/admin/products">
                         <NavDropdown.Item>Products</NavDropdown.Item>
                       </LinkContainer>
                       <LinkContainer to="/admin/orderlist">
@@ -186,13 +186,14 @@ function App() {
                 }
               />
               <Route
-                path="admin/productlist"
+                path="admin/products"
                 element={
                   <AdminRoute>
                     <ProductListScreen />
                   </AdminRoute>
                 }
               />
+
               <Route path="/placeOrder" element={<PlaceOrderScreen />} />
               <Route path="/order/:id" element={<OrderScreen />} />
               <Route path="/orderhistory" element={<OrderHistoryScreen />} />

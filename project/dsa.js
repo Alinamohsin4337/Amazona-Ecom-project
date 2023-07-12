@@ -61,15 +61,17 @@
 // console.log("greatest", greatest);
 
 //Q6 Duplicate
-let array6 = [1, 2, 4, 3, 2];
-let hasDuplicates = false;
+// let array6 = [1, 2, 4, 3, 2];
+// let hasDuplicates = false;
 
-for (let i = 0; i < array6.length; i++) {
-  for (let j = i + 1; j < array6.length; j++) {
-    if (array6[i] === array6[j]) {
-      hasDuplicates = true;
-    }
-  }
-}
+// for (let i = 0; i < array6.length; i++) {
+//   for (let j = i + 1; j < array6.length; j++) {
+//     if (array6[i] === array6[j]) {
+//       hasDuplicates = true;
+//     }
+//   }
+// }
 
-console.log(hasDuplicates);
+// console.log(hasDuplicates);
+
+//Q7 choclate distribution

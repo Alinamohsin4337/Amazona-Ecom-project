@@ -29,6 +29,7 @@ import SearchScreen from "./screens/SearchScreen";
 import ProtectedRoute from "./components/protectedRoutes";
 import AdminRoute from "./components/AdminRoute";
 import DashboardScreen from "./screens/DashboardScreen";
+import ProductListScreen from "./screens/ProductListScreen";
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
@@ -181,6 +182,14 @@ function App() {
                 element={
                   <AdminRoute>
                     <DashboardScreen />
+                  </AdminRoute>
+                }
+              />
+              <Route
+                path="admin/productlist"
+                element={
+                  <AdminRoute>
+                    <ProductListScreen />
                   </AdminRoute>
                 }
               />

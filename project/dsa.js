@@ -75,3 +75,27 @@
 // console.log(hasDuplicates);
 
 //Q7 choclate distribution
+let a = [7, 3, 2, 2, 4, 9, 12, 1, 56, 1];
+let m = 3;
+let a2 = [];
+
+for (let i = 0; i < m; i++) {
+  let min = a[i];
+  let minIndex = i;
+
+  for (let j = i + 1; j < a.length; j++) {
+    if (a[j] < min) {
+      min = a[j];
+      minIndex = j;
+    }
+  }
+
+  a2.push(min);
+
+  // Swap the smallest element with the current element at index i
+  let temp = a[i];
+  a[i] = a[minIndex];
+  a[minIndex] = temp;
+}
+
+console.log("a2", a2);

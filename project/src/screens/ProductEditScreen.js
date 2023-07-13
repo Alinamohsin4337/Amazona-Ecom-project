@@ -96,7 +96,7 @@ export default function ProductEditScreen() {
     try {
       dispatch({ type: "UPDATE_REQUEST" });
       await axios.put(
-        `/api/products/${productId}`,
+        `http://localhost:5000/api/products/${productId}`,
         {
           _id: productId,
           name,

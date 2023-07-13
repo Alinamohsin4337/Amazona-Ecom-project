@@ -7,6 +7,7 @@ import SeedRouter from "./routes/seedRoutes.js";
 import productRouter from "./routes/productRoutes.js";
 import userRouter from "./routes/userRoutes.js";
 import orderRouter from "./routes/orderRoutes.js";
+import uploadRouter from "./routes/uploadRoutes.js";
 // import axios from "axios";
 
 dotenv.config();
@@ -31,7 +32,7 @@ app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
 });
 app.use("/api/users", userRouter);
-
+app.use("/api/upload", uploadRouter);
 app.use("/api/seed", SeedRouter);
 app.use("/api/products", productRouter);
 app.use("/api/orders", orderRouter);

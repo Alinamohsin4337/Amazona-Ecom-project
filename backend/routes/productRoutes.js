@@ -18,7 +18,7 @@ productRouter.post(
     const newProduct = new Product({
       name: "sample name " + Date.now(),
       slug: "sample-name-" + Date.now(),
-      image: "/images/p1.jpg",
+      image: "../images/form10.jpg",
       price: 0,
       category: "sample category",
       brand: "sample brand",
@@ -64,7 +64,7 @@ productRouter.delete(
   expressAsyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (product) {
-      await product.remove();
+      await product.deleteOne();
       res.send({ message: "Product Deleted" });
     } else {
       res.status(404).send({ message: "Product Not Found" });
@@ -72,7 +72,7 @@ productRouter.delete(
   })
 );
 
-const PAGE_SIZE = 3;
+const PAGE_SIZE = 10;
 
 productRouter.get(
   "/admin",

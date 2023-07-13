@@ -32,9 +32,6 @@ const reducer = (state, action) => {
 };
 
 function ProductScreen() {
-  let reviewsRef = useRef();
-
-  const [comment, setComment] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
 
   const navigate = useNavigate();
@@ -80,13 +77,6 @@ function ProductScreen() {
     navigate("/cart");
   };
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
-    if (!comment) {
-      toast.error("Please enter comment ");
-      return;
-    }
-  };
   return loading ? (
     <LoadingBox />
   ) : error ? (

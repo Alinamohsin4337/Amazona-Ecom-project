@@ -95,6 +95,19 @@ const data = {
       description: "high quality product",
       countInStock: 5,
     },
+    {
+      // _id: "1",
+      slug: " nikeshirt8",
+      name: "nike shirt 8",
+      category: "shirt",
+      image: "/images/form10.jpg",
+      images: "/images/form10.jpg",
+      price: "70",
+      rating: 4.0,
+      numReviews: 10,
+      description: "high quality product",
+      countInStock: 3,
+    },
   ],
 };
 

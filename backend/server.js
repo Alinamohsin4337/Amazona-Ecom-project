@@ -38,6 +38,7 @@ app.use("/api/products", productRouter);
 app.use("/api/orders", orderRouter);
 const __dirname = path.resolve();
 app.use(express.static(path.join(__dirname, "/project/build")));
+
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "/project/build/index.html"));
 });

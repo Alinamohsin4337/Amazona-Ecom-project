@@ -31,11 +31,8 @@ uploadRouter.post(
         streamifier.createReadStream(req.file.buffer).pipe(stream);
       });
     };
-    const result = await streamUpload(req).catch((error) => {
-      console.error("Error uploading file:", error);
-      // Handle the error appropriately (e.g., send an error response)
-    });
+    const result = await streamUpload(req);
+    res.send(result);
   }
 );
-
 export default uploadRouter;

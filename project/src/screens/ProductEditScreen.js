@@ -152,8 +152,8 @@ export default function ProductEditScreen() {
       dispatch({ type: "UPLOAD_FAIL", payload: getError(err) });
     }
   };
-  const deleteFileHandler = async (fileName, f) => {
-    console.log(fileName, f);
+  const deleteFileHandler = async (fileName) => {
+    console.log(fileName);
     console.log(images);
     console.log(images.filter((x) => x !== fileName));
     setImages(images.filter((x) => x !== fileName));

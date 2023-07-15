@@ -26,7 +26,7 @@ import axios from "axios";
 import { getError } from "./Utils";
 import SearchBox from "./components/SearchBox";
 import SearchScreen from "./screens/SearchScreen";
-import ProtectedRoute from "./components/protectedRoutes";
+// import ProtectedRoute from "./components/protectedRoutes";
 import AdminRoute from "./components/AdminRoute";
 import DashboardScreen from "./screens/DashboardScreen";
 import ProductListScreen from "./screens/ProductListScreen";
@@ -172,14 +172,7 @@ function App() {
               <Route path="/" element={<HomeScreen />} />
               <Route path="/shipping" element={<ShippingAddressScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
-              <Route
-                path="/profile"
-                element={
-                  <ProtectedRoute>
-                    <ProfileScreen />
-                  </ProtectedRoute>
-                }
-              />
+              <Route path="/profile" element={<ProfileScreen />} />
               <Route path="/payment" element={<PaymentMethodScreen />} />
               <Route
                 path="admin/dashboard"

@@ -65,7 +65,17 @@ userRouter.put(
     const user = await User.findById(req.params.id);
     if (user) {
       user.name = req.body.name || user.name;
-      user.email = req.body.email || user.email;
+
+      // Check if the new email already exists
+      if (req.body.email && req.body.email !== user.email) {
+        const existingUser = await User.findOne({ email: req.body.email });
+        if (existingUser) {
+          res.status(400).send({ message: "Email already exists" });
+          return;
+        }
+        user.email = req.body.email;
+      }
+
       user.isAdmin = Boolean(req.body.isAdmin);
       const updatedUser = await user.save();
       res.send({ message: "User Updated", user: updatedUser });

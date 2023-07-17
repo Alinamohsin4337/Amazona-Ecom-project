@@ -49,7 +49,7 @@ export default function PlaceOrderScreen() {
       dispatch({ type: "CREATE_REQUEST" });
 
       const { data } = await Axios.post(
-        "http://localhost:5000/api/orders",
+        "https://c-react-program-ecom-project.vercel.app/api/orders",
         {
           orderItems: cart.cartItems,
           shippingAddress: cart.shippingAddress,

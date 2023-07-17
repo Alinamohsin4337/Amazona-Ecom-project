@@ -21,8 +21,17 @@ mongoose
   });
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://c-react-program-ecom-project.vercel.app"],
+    method: ["POST", "GET"],
+    credentials: true,
+  })
+);
 app.use(express.json());
+mongoose.connect(
+  "mongodb+srv://amazona:amazona@cluster0.xaaeawz.mongodb.net/?retryWrites=true&w=majority"
+);
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/api/keys/paypal", (req, res) => {
@@ -36,17 +45,18 @@ app.use("/api/upload", uploadRouter);
 app.use("/api/seed", SeedRouter);
 app.use("/api/products", productRouter);
 app.use("/api/orders", orderRouter);
-const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, "/project/build")));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "/project/build/index.html"));
-});
+// const __dirname = path.resolve();
+// app.use(express.static(path.join(__dirname, "/project/build")));
+
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "/project/build/index.html"));
+// });
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 
-  // const url = "http://localhost:5000/api/users/profile";
+  // const url = "https://c-react-program-ecom-project.vercel.app/api/users/profile";
 
   // axios
   //   .get(url)

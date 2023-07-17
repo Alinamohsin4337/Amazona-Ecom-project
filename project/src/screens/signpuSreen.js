@@ -29,7 +29,7 @@ const SignupScreen = () => {
 
     try {
       const { data } = await Axios.post(
-        "http://localhost:5000/api/users/signup",
+        "https://c-react-program-ecom-project.vercel.app/api/users/signup",
         {
           name,
           email,

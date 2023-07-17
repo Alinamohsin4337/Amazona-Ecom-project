@@ -82,7 +82,7 @@ export default function ProductListScreen() {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:5000/api/products/admin?page=${page} `,
+          `https://c-react-program-ecom-project.vercel.app/api/products/admin?page=${page} `,
           {
             headers: { Authorization: `Bearer ${userInfo.token}` },
           }
@@ -104,7 +104,7 @@ export default function ProductListScreen() {
       try {
         dispatch({ type: "CREATE_REQUEST" });
         const { data } = await axios.post(
-          "http://localhost:5000/api/products",
+          "https://c-react-program-ecom-project.vercel.app/api/products",
           {},
           {
             headers: { Authorization: `Bearer ${userInfo.token}` },
@@ -126,7 +126,7 @@ export default function ProductListScreen() {
     if (window.confirm("Are you sure to delete?")) {
       try {
         await axios.delete(
-          `http://localhost:5000/api/products/${product._id}`,
+          `https://c-react-program-ecom-project.vercel.app/api/products/${product._id}`,
           {
             headers: { Authorization: `Bearer ${userInfo.token}` },
           }

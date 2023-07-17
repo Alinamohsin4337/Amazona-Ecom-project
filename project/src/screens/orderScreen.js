@@ -95,7 +95,7 @@ export default function OrderScreen() {
       try {
         dispatch({ type: "PAY_REQUEST" });
         const { data } = await axios.put(
-          `http://localhost:5000/api/orders/${orderId}/pay`,
+          `https://c-react-program-ecom-project.vercel.app/api/orders/${orderId}/pay`,
           details,
           {
             headers: { authorization: `Bearer ${userInfo.token}` },
@@ -119,7 +119,7 @@ export default function OrderScreen() {
     try {
       dispatch({ type: "COD_REQUEST" });
       const { data } = await axios.put(
-        `http://localhost:5000/api/orders/${orderId}/pay/cod`,
+        `https://c-react-program-ecom-project.vercel.app/api/orders/${orderId}/pay/cod`,
         {},
         {
           headers: { authorization: `Bearer ${userInfo.token}` },
@@ -140,7 +140,7 @@ export default function OrderScreen() {
       try {
         dispatch({ type: "FETCH_REQUEST" });
         const { data } = await axios.get(
-          `http://localhost:5000/api/orders/${orderId}`,
+          `https://c-react-program-ecom-project.vercel.app/api/orders/${orderId}`,
           {
             headers: { authorization: `Bearer ${userInfo.token}` },
           }
@@ -161,7 +161,7 @@ export default function OrderScreen() {
     } else {
       const loadPaypalScript = async () => {
         const { data: clientId } = await axios.get(
-          "http://localhost:5000/api/keys/paypal",
+          "https://c-react-program-ecom-project.vercel.app/api/keys/paypal",
           {
             headers: { authorization: `Bearer ${userInfo.token}` },
           }

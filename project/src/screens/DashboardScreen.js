@@ -37,7 +37,7 @@ export default function DashboardScreen() {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:5000/api/orders/summary",
+          "https://c-react-program-ecom-project.vercel.app/api/orders/summary",
           {
             headers: { Authorization: `Bearer ${userInfo.token}` },
           }

@@ -19,7 +19,7 @@ function Product(props) {
   const addToCartHandler = async (item) => {
     const quantity = existItem ? existItem.quantity + 1 : 1;
     const { data } = await axios.get(
-      `http://localhost:5000/api/products/${item._id}`
+      `https://c-react-program-ecom-project.vercel.app/api/products/${item._id}`
     );
     if (data.countInStock < quantity) {
       window.alert("Sorry. Product is out of stock");

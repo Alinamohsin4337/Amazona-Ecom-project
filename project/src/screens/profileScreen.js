@@ -37,7 +37,7 @@ export default function ProfileScreen() {
     e.preventDefault();
     try {
       const { data } = await axios.put(
-        "http://localhost:5000/api/users/profile",
+        "https://c-react-program-ecom-project.vercel.app/api/users/profile",
         {
           name,
           email,

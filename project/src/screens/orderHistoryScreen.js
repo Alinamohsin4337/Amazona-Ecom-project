@@ -35,7 +35,7 @@ export default function OrderHistoryScreen() {
       dispatch({ type: "FETCH_REQUEST" });
       try {
         const { data } = await axios.get(
-          `https://c-react-program-ecom-project.vercel.app/api/orders/mine`,
+          `http://localhost:5000/api/orders/mine`,
 
           {
             headers: { authorization: `Bearer ${userInfo.token}` },

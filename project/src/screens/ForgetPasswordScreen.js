@@ -27,7 +27,7 @@ export default function ForgetPasswordScreen() {
     e.preventDefault();
     try {
       const { data } = await Axios.post(
-        "http://localhost:4000/api/users/forget-password",
+        "http://localhost:4000http://localhost:5000/api/users/forget-password",
         {
           email,
         }

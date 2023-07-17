@@ -21,17 +21,9 @@ mongoose
   });
 
 const app = express();
-app.use(
-  cors({
-    origin: ["https://c-react-program-ecom-project.vercel.app"],
-    method: ["POST", "GET"],
-    credentials: true,
-  })
-);
+
 app.use(express.json());
-mongoose.connect(
-  "mongodb+srv://amazona:amazona@cluster0.xaaeawz.mongodb.net/?retryWrites=true&w=majority"
-);
+
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/api/keys/paypal", (req, res) => {
@@ -56,7 +48,7 @@ const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 
-  // const url = "https://c-react-program-ecom-project.vercel.app/api/users/profile";
+  // const url = "/api/users/profile";
 
   // axios
   //   .get(url)

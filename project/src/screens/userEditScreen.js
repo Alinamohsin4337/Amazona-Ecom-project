@@ -52,7 +52,7 @@ export default function UserEditScreen() {
       try {
         dispatch({ type: "FETCH_REQUEST" });
         const { data } = await axios.get(
-          `https://c-react-program-ecom-project.vercel.app/api/users/${userId}`,
+          `http://localhost:5000/api/users/${userId}`,
           {
             headers: { Authorization: `Bearer ${userInfo.token}` },
           }
@@ -76,7 +76,7 @@ export default function UserEditScreen() {
     try {
       dispatch({ type: "UPDATE_REQUEST" });
       await axios.put(
-        `https://c-react-program-ecom-project.vercel.app/api/users/${userId}`,
+        `http://localhost:5000/api/users/${userId}`,
         { _id: userId, name, email, isAdmin },
         {
           headers: { Authorization: `Bearer ${userInfo.token}` },

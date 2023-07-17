@@ -51,7 +51,7 @@ function App() {
     const fetchCategories = async () => {
       try {
         const { data } = await axios.get(
-          `https://c-react-program-ecom-project.vercel.app/api/products/categories`
+          `http://localhost:5000/api/products/categories`
         );
         setCategories(data);
       } catch (err) {

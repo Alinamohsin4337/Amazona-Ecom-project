@@ -32,10 +32,13 @@ export default function ResetPasswordScreen() {
       return;
     }
     try {
-      await Axios.post("http://localhost:4000/api/users/reset-password", {
-        password,
-        token,
-      });
+      await Axios.post(
+        "http://localhost:4000http://localhost:5000/api/users/reset-password",
+        {
+          password,
+          token,
+        }
+      );
       navigate("/signin");
       toast.success("Password updated successfully");
     } catch (err) {
